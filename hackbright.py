@@ -162,7 +162,7 @@ def get_all_projects_and_students():
 
     QUERY = """
         SELECT projects.title, students.github
-        FROM students FULL OUTER JOIN projects USING (title)
+        FROM students FULL OUTER JOIN projects USING (github)
         """
 
     db_cursor = db.session.execute(QUERY)
@@ -218,7 +218,7 @@ def handle_input():
 if __name__ == "__main__":
     connect_to_db(app)
 
-    handle_input()
+    # handle_input()
 
     # To be tidy, we'll close our database connection -- though, since this
     # is where our program ends, we'd quit anyway.

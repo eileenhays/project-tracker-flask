@@ -59,6 +59,27 @@ def make_new_student(first_name, last_name, github):
         first=first_name, last=last_name)
 
 
+def make_new_project(title, description, max_grade):
+    """Add a new project and print confirmation.
+
+    Given a title, description, and max grade, add project to the
+    database and print a confirmation message.
+    """
+
+    QUERY = """
+        INSERT INTO Projects (title, description, max_grade)
+          VALUES (:title, :description, :max_grade)
+        """
+
+    db.session.execute(QUERY, {'title': title,
+                               'description': description,
+                               'max_grade': max_grade})
+    db.session.commit()
+
+    print "Successfully added project: {title}".format(
+        title=title)
+
+
 def get_project_by_title(title):
     """Given a project title, print information about the project."""
 
@@ -157,19 +178,30 @@ def get_grades_by_title(title):
     return rows
 
 
-def get_all_projects_and_students():
-    """Get all project titles and students"""
+def get_all_projects():
+    """Get all project titles"""
 
     QUERY = """
-        SELECT projects.title, students.github
-        FROM students FULL OUTER JOIN projects USING (github)
+        SELECT title FROM projects
         """
 
     db_cursor = db.session.execute(QUERY)
 
-    rows = db_cursor.fetchall()
+    project_titles = db_cursor.fetchall()
 
-    return rows
+    return project_titles
+
+
+def get_all_students():
+    """Get all student github accounts"""
+
+    QUERY = """ SELECT github FROM students """
+
+    cursor = db.session.execute(QUERY)
+
+    github_names = cursor.fetchall()
+
+    return github_names
 
 
 def handle_input():

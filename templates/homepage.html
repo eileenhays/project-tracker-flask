@@ -5,10 +5,14 @@
 </head>
 <body>
     <h1>Projects</h1><br>
-        <ul>{{ % for record in records % }}</ul>
-            <li>{{ record[0] }}</li>
-            {{ % endfor % }}
+        <ul>{% for project in projects %}
+            <li><a href='/project/{{ project[0] }}'> {{ project[0] }} </a> </li>
+            {% endfor %}
+        </ul>
     <h1>Students</h1><br>
-        <ul></ul>
+        <ul>{% for account in github %}
+            <li><a href='/student/{{ account[0] }}'> {{ account[0] }} </a></li>
+            {% endfor %}
+        </ul>
 </body>
 </html>

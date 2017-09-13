@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<head>
+    <title>Homepage</title>
+</head>
+<body>
+    <h1>Projects</h1><br>
+        <ul>{{ % for record in records % }}</ul>
+            <li>{{ record[0] }}</li>
+            {{ % endfor % }}
+    <h1>Students</h1><br>
+        <ul></ul>
+</body>
+</html>
